@@ -1,0 +1,27 @@
+This is a laravel project.
+
+Step 1. Clone the repository
+Step 2. run `composer install`
+Step 3. run `php artisan migrate`
+Step 3. run `php artisan config:cache`
+
+To test - run via nginx/apache OR `php artisan serve'
+
+Routes
+/ -> Default home page to get current weather for any city
+
+API Routes
+/api/city -> for City CRUD operation
+/api/city-weather -> for fetching last 5 days weather info for 5 cities or by city_id request params for single city
+
+Note: I did'nt get enough time to work on this as was on weekend. Worked on monday morning in 2 hours.
+
+Improvements can be done if extra time:
+
+1. Proper display of result to end user (may be using ajax or vue.js). currently i just rendered `main` key from api result on form submit
+2. Test cases
+3. API access restriction based on keys
+4. Caching
+5. Proper error handling if weather api does not return any response
+6. proper bootstrap integration via npm. currently included via cdn
+
