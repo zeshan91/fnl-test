@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers\Weather;
+use Carbon\Carbon;
 
 class WeatherObject
 {
@@ -13,27 +14,28 @@ class WeatherObject
 
   public function getTime()
   {
-    return $this->jsonResult['dt'];
+    $timestamp = $this->jsonResult['dt'];
+    return Carbon::createFromTimestamp($timestamp)->format('Y-m-d H:i:s');
   }
 
   public function getTemp()
   {
-    return $this->jsonResult['main']['temp'];
+    return round($this->jsonResult['main']['temp'] / 10);
   }
 
   public function getFeelsLike()
   {
-    return $this->jsonResult['main']['feels_like'];
+    return round($this->jsonResult['main']['feels_like'] / 10);
   }
 
   public function getMinTemp()
   {
-    return $this->jsonResult['main']['temp_min'];
+    return round($this->jsonResult['main']['temp_min'] / 10);
   }
 
   public function getMaxTemp()
   {
-    return $this->jsonResult['main']['temp_max'];
+    return round($this->jsonResult['main']['temp_max'] / 10);
   }
 
   public function getPressure()
@@ -49,5 +51,15 @@ class WeatherObject
   public function getMainData()
   {
     return $this->jsonResult['main'];
+  }
+
+  public function getIcon()
+  {
+    return $this->jsonResult['weather'][0]['icon'];
+  }
+
+  public function getCloud()
+  {
+    return $this->jsonResult['weather'][0]['main'];
   }
 }

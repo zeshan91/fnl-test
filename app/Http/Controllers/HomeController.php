@@ -11,10 +11,21 @@ class HomeController extends Controller
   {
     $cityOrArea = $request->query('cityOrArea');
     $weather = NULL;
+    $error = NULL;
     if ($cityOrArea) {
-      $weather = WeatherHelper::getCurrentWeather($cityOrArea);
+      try {
+        $weather = WeatherHelper::getCurrentWeather($cityOrArea);
+      }
+      catch(\Exception $e) {
+        $error = $e->getMessage();
+      }
+
     }
-    return view('home')->with(['weather' => $weather, 'cityOrArea' => $cityOrArea]);
+    return view('home')->with([
+      'weather' => $weather,
+      'cityOrArea' => $cityOrArea,
+      'error' => $error,
+    ]);
 
   }
 }
